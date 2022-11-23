@@ -17,10 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//sample
 Route::get('/sample', [\App\Http\Controllers\Sample\IndexController::class, 'show']);
 
 Route::get('/sample/{id}', [\App\Http\Controllers\Sample\IndexController::class, 'showId']);
 
+//tweet
 Route::get('/tweet', \App\Http\Controllers\Tweet\IndexController::class)
 ->name('tweet.index');
 
