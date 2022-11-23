@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Tweet\Update;
+namespace App\Http\Controllers\Tweet;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Tweet;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class IndexController extends Controller
+class DeleteController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -19,6 +18,9 @@ class IndexController extends Controller
     {
         $tweetId = (int) $request->route('tweetId');
         $tweet = Tweet::where('id', $tweetId)->firstOrFail();
-        return view('tweet.update')->with('tweet', $tweet);
+        $tweet->delete();
+        return redirect()
+            ->route('tweet.index')
+            ->with('feedback.success', "つぶやきを削除しました");
     }
 }
