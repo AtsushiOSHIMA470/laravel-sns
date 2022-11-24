@@ -26,8 +26,9 @@ Route::get('/sample/{id}', [\App\Http\Controllers\Sample\IndexController::class,
 Route::get('/tweet', \App\Http\Controllers\Tweet\IndexController::class)
 ->name('tweet.index');
 
+Route::middleware('auth')->group(function() {
+
 Route::post('/tweet/create', \App\Http\Controllers\Tweet\CreateController::class)
-->middleware('auth')
 ->name('tweet.create');
 
 Route::get('/tweet/update/{tweetId}', \App\Http\Controllers\Tweet\Update\IndexController::class)
@@ -38,6 +39,7 @@ Route::put('/tweet/update/{tweetId}', \App\Http\Controllers\Tweet\Update\PutCont
 
 Route::delete('/tweet/delete/{tweetId}', \App\Http\Controllers\Tweet\DeleteController::class)
 ->name('tweet.delete');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
