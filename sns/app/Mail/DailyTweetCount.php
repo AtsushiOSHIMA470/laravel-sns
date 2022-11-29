@@ -10,22 +10,22 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class NewUserIntroduction extends Mailable implements ShouldQueue
+class DailyTweetCount extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
     public User $toUser;
-    public User $newUser;
+    public int $count;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $toUser, User $newUser)
+    public function __construct(User $toUser, int $count)
     {
         $this->toUser = $toUser;
-        $this->newUser = $newUser;
+        $this->count = $count;
     }
 
     /**
@@ -36,7 +36,7 @@ class NewUserIntroduction extends Mailable implements ShouldQueue
     public function envelope()
     {
         return new Envelope(
-            subject: '新しいユーザーが追加されました',
+            subject: 'tweets added yesterday !',
         );
     }
 
@@ -48,7 +48,7 @@ class NewUserIntroduction extends Mailable implements ShouldQueue
     public function content()
     {
         return new Content(
-            markdown: 'email.new_user_introduction',
+            markdown: 'email.daily_tweet_count',
         );
     }
 
