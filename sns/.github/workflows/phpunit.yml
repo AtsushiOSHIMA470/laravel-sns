@@ -24,7 +24,7 @@ jobs:
           MYSQL_USER: ${{ env.DB_USERNAME }}
           MYSQL_PASSWORD: ${{ env.DB_PASSWORD }}
           MYSQL_ALLOW_EMPTY_PASSWORD: 1
-        options:
+        options: >-
           --health-cmd "mysqladmin ping"
           --health-interval 10s
           --health-timeout 5s
